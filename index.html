@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Omnicell | Candidate Interview Portal</title>
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --surface: #ffffff;
+      --surface-soft: #eef3f9;
+      --ink: #0f172a;
+      --muted: #475569;
+      --brand: #0056b3;
+      --brand-dark: #003d82;
+      --accent: #0d9488;
+      --border: #dbe3ee;
+      --success-bg: #ecfdf5;
+      --success-border: #a7f3d0;
+      --success-text: #065f46;
+      --warn-bg: #eff6ff;
+      --warn-border: #bfdbfe;
+      --warn-text: #1e40af;
+      --shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+      --radius: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Top Corporate Header */
+    .topbar {
+      background: linear-gradient(135deg, #071e3d 0%, #004c97 100%);
+      color: #ffffff;
+      padding: 18px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .topbar-inner {
+      max-width: 1060px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand-lockup {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-mark {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: 0.5px;
+    }
+
+    .brand-title {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+    }
+
+    .brand-sub {
+      font-size: 12.5px;
+      color: #cbd5e1;
+    }
+
+    .support-pill {
+      font-size: 12.5px;
+      color: #e2e8f0;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 7px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+    }
+
+    .container {
+      max-width: 1060px;
+      margin: 24px auto 56px;
+      padding: 0 16px;
+    }
+
+    /* Device Notice Banner */
+    .device-notice {
+      background: var(--warn-bg);
+      border: 1px solid var(--warn-border);
+      color: var(--warn-text);
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      margin-bottom: 22px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 14px;
+    }
+
+    .device-notice strong {
+      font-weight: 600;
+    }
+
+    /* Hero Card */
+    .hero-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow);
+      margin-bottom: 22px;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 24px;
+      align-items: center;
+    }
+
+    @media (max-width: 820px) {
+      .hero-card {
+        grid-template-columns: 1fr;
+        padding: 22px;
+      }
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--brand);
+      background: #e6f0fa;
+      padding: 5px 10px;
+      border-radius: 6px;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: 28px;
+      line-height: 1.22;
+      color: var(--ink);
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+
+    .hero-copy {
+      color: var(--muted);
+      font-size: 15px;
+      margin-bottom: 18px;
+    }
+
+    .metrics-box {
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .metric-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      border-bottom: 1px solid #dce4ef;
+      padding-bottom: 10px;
+    }
+
+    .metric-row:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .metric-label {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .metric-val {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    /* Step Tabs */
+    .stepper {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .step-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 13px 14px;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      color: var(--muted);
+      font-size: 13.5px;
+      font-weight: 600;
+    }
+
+    .step-btn span {
+      display: block;
+      font-size: 11.5px;
+      font-weight: 500;
+      opacity: 0.8;
+      margin-bottom: 2px;
+    }
+
+    .step-btn.active {
+      border-color: var(--brand);
+      background: #f0f6ff;
+      color: var(--brand-dark);
+      box-shadow: 0 4px 14px rgba(0, 86, 179, 0.08);
+    }
+
+    /* Main Panel */
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 26px;
+      box-shadow: var(--shadow);
+      margin-bottom: 22px;
+    }
+
+    @media (max-width: 640px) {
+      .panel {
+        padding: 18px;
+      }
+    }
+
+    .panel-header {
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .panel-header h2 {
+      font-size: 20px;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+
+    .panel-header p {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 700px) {
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .field {
+      margin-bottom: 16px;
+    }
+
+    label {
+      display: block;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      font-size: 14.5px;
+      font-family: inherit;
+      color: var(--ink);
+      background: #ffffff;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--brand);
+      box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.12);
+    }
+
+    textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-top: 8px;
+    }
+
+    button.btn {
+      border: none;
+      border-radius: 10px;
+      padding: 12px 18px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: var(--brand);
+      color: #ffffff;
+    }
+
+    .btn-primary:hover {
+      background: var(--brand-dark);
+    }
+
+    .btn-secondary {
+      background: var(--surface-soft);
+      color: var(--ink);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      background: #e2e8f0;
+    }
+
+    .btn-accent {
+      background: var(--accent);
+      color: #ffffff;
+    }
+
+    .btn-accent:hover {
+      background: #0f766e;
+    }
+
+    /* Proctoring & Media Grid */
+    .media-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    @media (max-width: 720px) {
+      .media-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .media-box {
+      background: #0f172a;
+      color: #f8fafc;
+      border-radius: 12px;
+      padding: 14px;
+      border: 1px solid #1e293b;
+    }
+
+    .media-box-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      margin-bottom: 10px;
+      color: #cbd5e1;
+    }
+
+    .status-chip {
+      font-size: 11.5px;
+      font-weight: 600;
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      color: #e2e8f0;
+    }
+
+    .status-chip.ok {
+      background: rgba(16, 185, 129, 0.22);
+      color: #6ee7b7;
+    }
+
+    .status-chip.info {
+      background: rgba(59, 130, 246, 0.25);
+      color: #93c5fd;
+    }
+
+    video {
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+      border-radius: 8px;
+      background: #020617;
+      display: block;
+    }
+
+    /* Zara Interviewer Box */
+    .zara-card {
+      background: linear-gradient(135deg, #f8fbff 0%, #eef5ff 100%);
+      border: 1px solid #cfe0f5;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 18px;
+    }
+
+    .zara-top {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .zara-badge {
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--brand-dark);
+    }
+
+    .zara-question {
+      font-size: 16.5px;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 12px;
+    }
+
+    .transcript-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .msg {
+      padding: 12px 14px;
+      border-radius: 10px;
+      font-size: 14px;
+      border: 1px solid var(--border);
+    }
+
+    .msg.zara {
+      background: #f8fafc;
+    }
+
+    .msg.candidate {
+      background: #eff6ff;
+      border-color: #bfdbfe;
+    }
+
+    .msg-role {
+      font-size: 11.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+      color: var(--muted);
+    }
+
+    .alert-success {
+      background: var(--success-bg);
+      border: 1px solid var(--success-border);
+      color: var(--success-text);
+      padding: 14px 16px;
+      border-radius: 10px;
+      font-size: 14px;
+      margin-top: 14px;
+      display: none;
+    }
+
+    .helper-note {
+      font-size: 12.5px;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+      padding: 18px 0 32px;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand-lockup">
+        <div class="brand-mark">O</div>
+        <div>
+          <div class="brand-title">Omnicell</div>
+          <div class="brand-sub">Connected Healthcare &amp; Medication Management Talent Portal</div>
+        </div>
+      </div>
+      <div class="support-pill">Candidate Support: omnicell.groups@gmail.com</div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- Desktop / Laptop Recommendation Notice -->
+    <div class="device-notice" role="region" aria-label="Recommended device notice">
+      <div>&#128187;</div>
+      <div>
+        <strong>Recommended Experience:</strong> You can complete this interview on a mobile browser, but using a <strong>desktop or laptop</strong> provides a smoother interface, clearer audio/video controls, and full screen-share support where required.
+      </div>
+    </div>
+
+    <!-- Corporate Overview -->
+    <section class="hero-card">
+      <div>
+        <span class="eyebrow">Structured Talent Assessment</span>
+        <h1>Welcome to Your Omnicell Candidate Interview with Zara</h1>
+        <p class="hero-copy">
+          Omnicell partners with health systems and pharmacies worldwide to transform medication management and clinical operations. Zara tailors your interview questions to your resume and role focus, then sends a structured confirmation and summary to your email.
+        </p>
+        <div class="btn-row">
+          <button class="btn btn-primary" onclick="switchStep(1)">Begin Resume &amp; Profile</button>
+          <button class="btn btn-secondary" onclick="switchStep(2)">Go to Interview Room</button>
+        </div>
+      </div>
+
+      <div class="metrics-box">
+        <div class="metric-row">
+          <span class="metric-label">Headquarters</span>
+          <span class="metric-val">Fort Worth, Texas</span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">Candidate Rating</span>
+          <span class="metric-val">4.9 / 5.0 Verified Reviews</span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">Interviewer</span>
+          <span class="metric-val">Zara (Voice &amp; Text Enabled)</span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">Confirmation Sender</span>
+          <span class="metric-val">omnicell.groups@gmail.com</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Navigation Steps -->
+    <nav class="stepper" aria-label="Interview steps">
+      <button class="step-btn active" id="tab-1" onclick="switchStep(1)">
+        <span>Step 01</span>
+        Resume &amp; Candidate Details
+      </button>
+      <button class="step-btn" id="tab-2" onclick="switchStep(2)">
+        <span>Step 02</span>
+        Live Interview Session
+      </button>
+      <button class="step-btn" id="tab-3" onclick="switchStep(3)">
+        <span>Step 03</span>
+        Summary &amp; Email Dispatch
+      </button>
+    </nav>
+
+    <!-- STEP 1: RESUME & DETAILS -->
+    <section class="panel" id="step-1">
+      <div class="panel-header">
+        <h2>Candidate Profile &amp; Resume Tailoring</h2>
+        <p>Provide your contact information and paste or upload your resume so Zara can tailor your interview questions.</p>
+      </div>
+
+      <div class="grid-2">
+        <div class="field">
+          <label for="candName">Full Name</label>
+          <input type="text" id="candName" placeholder="e.g., Jordan Taylor" />
+        </div>
+        <div class="field">
+          <label for="candEmail">Email Address (for Confirmation &amp; Summary)</label>
+          <input type="email" id="candEmail" placeholder="e.g., candidate@domain.com" />
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="field">
+          <label for="roleTrack">Target Role Track</label>
+          <select id="roleTrack">
+            <option value="Healthcare Operations &amp; Administrative Coordinator">Healthcare Operations &amp; Administrative Coordinator</option>
+            <option value="Remote Client &amp; Clinical Support Specialist">Remote Client &amp; Clinical Support Specialist</option>
+            <option value="Medication Supply &amp; Data Verification Specialist">Medication Supply &amp; Data Verification Specialist</option>
+            <option value="Executive &amp; Virtual Operations Assistant">Executive &amp; Virtual Operations Assistant</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="resumeFile">Upload Resume (.txt, .md, .csv)</label>
+          <input type="file" id="resumeFile" accept=".txt,.md,.csv" onchange="handleResumeUpload(event)" />
+          <div class="helper-note">Or paste your resume text directly below.</div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="resumeText">Resume / Experience Summary</label>
+        <textarea id="resumeText" placeholder="Paste your work experience, key skills, healthcare or administrative background, and measurable achievements..."></textarea>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="saveProfileAndStart()">Save Profile &amp; Start Interview</button>
+      </div>
+    </section>
+
+    <!-- STEP 2: INTERVIEW SESSION -->
+    <section class="panel" id="step-2" style="display: none;">
+      <div class="panel-header">
+        <h2>Interview Session with Zara</h2>
+        <p>Respond by typing or using your microphone. Screen sharing is optional on mobile devices and supported on desktop browsers.</p>
+      </div>
+
+      <div class="media-grid">
+        <div class="media-box">
+          <div class="media-box-header">
+            <span>Camera &amp; Microphone</span>
+            <span class="status-chip" id="camStatus">Ready</span>
+          </div>
+          <video id="cameraPreview" autoplay playsinline muted></video>
+          <div class="btn-row" style="margin-top: 10px;">
+            <button class="btn btn-secondary" onclick="toggleCameraAndMic()">Enable Camera &amp; Mic</button>
+          </div>
+        </div>
+
+        <div class="media-box">
+          <div class="media-box-header">
+            <span>Screen Share (Desktop Recommended)</span>
+            <span class="status-chip" id="screenStatus">Optional on Mobile</span>
+          </div>
+          <video id="screenPreview" autoplay playsinline muted></video>
+          <div class="btn-row" style="margin-top: 10px;">
+            <button class="btn btn-secondary" onclick="toggleScreenShare()">Share Screen</button>
+          </div>
+          <div class="helper-note" style="color: #94a3b8;" id="screenHelpText">
+            If your mobile browser or frame restricts screen capture, you can continue seamlessly without it.
+          </div>
+        </div>
+      </div>
+
+      <div class="zara-card">
+        <div class="zara-top">
+          <div class="zara-badge">Zara — Omnicell Talent Interviewer</div>
+          <div class="btn-row" style="margin-top: 0;">
+            <button class="btn btn-secondary" onclick="speakCurrentQuestion()">&#128266; Hear Zara Speak</button>
+            <button class="btn btn-secondary" onclick="stopSpeech()">Stop Voice</button>
+          </div>
+        </div>
+        <div class="zara-question" id="currentQuestionText">
+          Hi there! Welcome to Omnicell. When you're ready, tell me a little about your background and what draws you to this role.
+        </div>
+        <div class="helper-note" id="questionCounter">Question 1 of 4</div>
+      </div>
+
+      <div class="field">
+        <label for="answerInput">Your Response</label>
+        <textarea id="answerInput" placeholder="Type your answer here, or tap 'Dictate Answer' if your browser supports speech input..."></textarea>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-secondary" id="dictateBtn" onclick="startDictation()">&#127897;&#65039; Dictate Answer</button>
+        <button class="btn btn-primary" onclick="submitAnswer()">Submit Answer &amp; Continue</button>
+        <button class="btn btn-accent" onclick="switchStep(3)">Finish &amp; Review Summary</button>
+      </div>
+
+      <div class="transcript-list" id="transcriptList"></div>
+    </section>
+
+    <!-- STEP 3: SUMMARY & AUTOMATED EMAIL -->
+    <section class="panel" id="step-3" style="display: none;">
+      <div class="panel-header">
+        <h2>Interview Summary &amp; Email Dispatch</h2>
+        <p>Review your session details and trigger the automated confirmation email via Make.com.</p>
+      </div>
+
+      <div class="field">
+        <label for="webhookUrl">Make.com Webhook URL (for Automated Email via omnicell.groups@gmail.com)</label>
+        <input type="text" id="webhookUrl" placeholder="https://hook.us1.make.com/your-webhook-id" />
+        <div class="helper-note">Saved automatically in your browser so you only need to paste it once.</div>
+      </div>
+
+      <div class="field">
+        <label for="summaryPreview">Generated Interview Summary</label>
+        <textarea id="summaryPreview" readonly></textarea>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-secondary" onclick="buildSummary()">Refresh Summary</button>
+        <button class="btn btn-primary" onclick="sendAutomatedEmail()">Send Confirmation Email</button>
+      </div>
+
+      <div class="alert-success" id="dispatchStatus"></div>
+    </section>
+
+  </main>
+
+  <footer>
+    Omnicell Candidate Portal &bull; Inquiries: omnicell.groups@gmail.com
+  </footer>
+
+  <script>
+    const state = {
+      name: "",
+      email: "",
+      role: "Healthcare Operations & Administrative Coordinator",
+      resume: "",
+      questions: [],
+      qIndex: 0,
+      responses: [],
+      selectedVoice: null
+    };
+
+    /* --- Sweet, Siri-Like Voice Setup --- */
+    function pickSweetVoice() {
+      if (!("speechSynthesis" in window)) return null;
+      const voices = window.speechSynthesis.getVoices();
+      if (!voices || !voices.length) return null;
+
+      const preferredNames = [
+        "Samantha",
+        "Siri",
+        "Aria",
+        "Jenny",
+        "Ava",
+        "Zira",
+        "Google UK English Female",
+        "Google US English",
+        "Serena",
+        "Moira"
+      ];
+
+      for (const target of preferredNames) {
+        const match = voices.find(v => v.name.toLowerCase().includes(target.toLowerCase()));
+        if (match) return match;
+      }
+
+      const englishFemale = voices.find(
+        v => v.lang.toLowerCase().startsWith("en") && /female|woman|girl|natural|neural/i.test(v.name)
+      );
+      if (englishFemale) return englishFemale;
+
+      return voices.find(v => v.lang.toLowerCase().startsWith("en")) || voices[0];
+    }
+
+    function initVoices() {
+      if (!("speechSynthesis" in window)) return;
+      state.selectedVoice = pickSweetVoice();
+      window.speechSynthesis.onvoiceschanged = () => {
+        state.selectedVoice = pickSweetVoice();
+      };
+    }
+
+    function stopSpeech() {
+      if ("speechSynthesis" in window) {
+        window.speechSynthesis.cancel();
+      }
+    }
+
+    function speakText(text) {
+      if (!("speechSynthesis" in window) || !text) return;
+      window.speechSynthesis.cancel();
+
+      const spoken = text
+        .replace(/HIPAA/g, "H-I-P-A-A")
+        .replace(/EHR/g, "electronic health records")
+        .replace(/&amp;/g, "and");
+
+      const utterance = new SpeechSynthesisUtterance(spoken);
+      const voice = state.selectedVoice || pickSweetVoice();
+      if (voice) utterance.voice = voice;
+      utterance.rate = 0.97;
+      utterance.pitch = 1.07;
+      utterance.volume = 1.0;
+
+      window.speechSynthesis.speak(utterance);
+    }
+
+    function speakCurrentQuestion() {
+      const qText = document.getElementById("currentQuestionText").textContent.trim();
+      speakText(qText);
+    }
+
+    /* --- Navigation --- */
+    function switchStep(stepNum) {
+      [1, 2, 3].forEach(n => {
+        document.getElementById(`step-${n}`).style.display = n === stepNum ? "block" : "none";
+        document.getElementById(`tab-${n}`).classList.toggle("active", n === stepNum);
+      });
+      if (stepNum === 3) buildSummary();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    /* --- Resume & Question Tailoring --- */
+    function handleResumeUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = e => {
+        document.getElementById("resumeText").value = e.target.result || "";
+      };
+      reader.readAsText(file);
+    }
+
+    function extractHighlight(resumeText) {
+      const clean = (resumeText || "").replace(/\s+/g, " ").trim();
+      if (!clean) return "";
+      const keywords = ["HIPAA", "EHR", "inventory", "scheduling", "compliance", "audit", "customer", "data", "healthcare", "operations"];
+      const found = keywords.filter(k => new RegExp(`\b${k}\b`, "i").test(clean));
+      return found.length ? found.slice(0, 2).join(" and ") : "";
+    }
+
+    function generateQuestions(name, role, resumeText) {
+      const firstName = (name || "there").trim().split(" ")[0];
+      const focus = extractHighlight(resumeText);
+
+      const q1 = `Hi ${firstName}! It's so nice to meet you. Welcome to Omnicell. To start us off, could you walk me through your background and what excites you about the ${role} role?`;
+
+      const q2 = focus
+        ? `I noticed ${focus} in your experience. Could you share a specific example of how you handled a high-priority task in that area while keeping accuracy high?`
+        : `Tell me about a time you managed competing priorities or tight deadlines. How did you stay organized and keep stakeholders informed?`;
+
+      const q3 = `In healthcare and medication operations, clarity and reliability really matter. How do you approach following standard procedures when an unexpected issue or escalation comes up?`;
+
+      const q4 = `Lastly, ${firstName}, what kind of work environment helps you do your best work, and what questions do you have for our team at Omnicell?`;
+
+      return [q1, q2, q3, q4];
+    }
+
+    function saveProfileAndStart() {
+      state.name = document.getElementById("candName").value.trim() || "Candidate";
+      state.email = document.getElementById("candEmail").value.trim();
+      state.role = document.getElementById("roleTrack").value;
+      state.resume = document.getElementById("resumeText").value.trim();
+
+      state.questions = generateQuestions(state.name, state.role, state.resume);
+      state.qIndex = 0;
+      state.responses = [];
+      document.getElementById("transcriptList").innerHTML = "";
+
+      renderCurrentQuestion();
+      switchStep(2);
+      setTimeout(() => speakCurrentQuestion(), 350);
+    }
+
+    function renderCurrentQuestion() {
+      const total = state.questions.length || 4;
+      const current = state.questions[state.qIndex] || "Thank you for sharing your responses.";
+      document.getElementById("currentQuestionText").textContent = current;
+      document.getElementById("questionCounter").textContent = `Question ${Math.min(state.qIndex + 1, total)} of ${total}`;
+    }
+
+    function submitAnswer() {
+      const answer = document.getElementById("answerInput").value.trim();
+      if (!answer) {
+        alert("Please enter or dictate your answer before continuing.");
+        return;
+      }
+
+      const question = document.getElementById("currentQuestionText").textContent.trim();
+      state.responses.push({ question, answer });
+
+      const list = document.getElementById("transcriptList");
+      list.innerHTML += `
+        <div class="msg zara">
+          <div class="msg-role">Zara</div>
+          <div>${escapeHtml(question)}</div>
+        </div>
+        <div class="msg candidate">
+          <div class="msg-role">${escapeHtml(state.name || "Candidate")}</div>
+          <div>${escapeHtml(answer)}</div>
+        </div>
+      `;
+
+      document.getElementById("answerInput").value = "";
+      state.qIndex += 1;
+
+      if (state.qIndex < state.questions.length) {
+        renderCurrentQuestion();
+        const followUp = `Thank you for sharing that. ${state.questions[state.qIndex]}`;
+        document.getElementById("currentQuestionText").textContent = state.questions[state.qIndex];
+        speakText(followUp);
+      } else {
+        const closing = `Wonderful, ${state.name.split(" ")[0] || "thank you"}. You've completed all of our interview questions. Let's head over to your summary and confirmation email.`;
+        document.getElementById("currentQuestionText").textContent = closing;
+        document.getElementById("questionCounter").textContent = "All Questions Completed";
+        speakText(closing);
+      }
+    }
+
+    /* --- Optional Dictation (Mobile/Browser Safe) --- */
+    function startDictation() {
+      const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRec) {
+        alert("Voice dictation isn't supported in this browser, so feel free to type your answer directly.");
+        return;
+      }
+
+      const recognition = new SpeechRec();
+      recognition.lang = "en-US";
+      recognition.interimResults = false;
+      recognition.maxAlternatives = 1;
+
+      const btn = document.getElementById("dictateBtn");
+      btn.textContent = "Listening...";
+
+      recognition.onresult = event => {
+        const spoken = event.results[0][0].transcript;
+        const box = document.getElementById("answerInput");
+        box.value = box.value ? `${box.value} ${spoken}` : spoken;
+      };
+
+      recognition.onerror = () => {
+        btn.textContent = "Dictate Answer";
+      };
+
+      recognition.onend = () => {
+        btn.textContent = "Dictate Answer";
+      };
+
+      recognition.start();
+    }
+
+    /* --- Camera, Mic & Graceful Screen Share --- */
+    async function toggleCameraAndMic() {
+      const chip = document.getElementById("camStatus");
+      const video = document.getElementById("cameraPreview");
+
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        chip.textContent = "Not Supported";
+        return;
+      }
+
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+        video.srcObject = stream;
+        chip.textContent = "Active";
+        chip.className = "status-chip ok";
+      } catch (err) {
+        chip.textContent = "Permission Needed / Unavailable";
+        chip.className = "status-chip";
+      }
+    }
+
+    async function toggleScreenShare() {
+      const chip = document.getElementById("screenStatus");
+      const video = document.getElementById("screenPreview");
+      const help = document.getElementById("screenHelpText");
+
+      const canShare = !!(navigator.mediaDevices && typeof navigator.mediaDevices.getDisplayMedia === "function");
+      if (!canShare) {
+        chip.textContent = "Desktop Recommended";
+        chip.className = "status-chip info";
+        help.textContent = "Screen sharing isn't supported on this mobile browser or frame. You can continue your interview smoothly without it.";
+        return;
+      }
+
+      try {
+        const stream = await navigator.mediaDevices.getDisplayMedia({ video: true, audio: false });
+        video.srcObject = stream;
+        chip.textContent = "Sharing Active";
+        chip.className = "status-chip ok";
+      } catch (err) {
+        chip.textContent = "Optional / Skipped";
+        chip.className = "status-chip info";
+        help.textContent = "Screen capture wasn't started or isn't permitted in this view—your interview session remains active.";
+      }
+    }
+
+    /* --- Summary & Make.com Webhook --- */
+    function buildSummary() {
+      const lines = [
+        "OMNICELL CANDIDATE INTERVIEW SUMMARY",
+        `Candidate Name: ${state.name || "Not provided"}`,
+        `Candidate Email: ${state.email || "Not provided"}`,
+        `Target Role: ${state.role}`,
+        `Support Contact: omnicell.groups@gmail.com`,
+        "",
+        "RESPONSES RECORDED:"
+      ];
+
+      if (!state.responses.length) {
+        lines.push("No interview responses recorded yet.");
+      } else {
+        state.responses.forEach((item, idx) => {
+          lines.push(`
+Q${idx + 1}: ${item.question}`);
+          lines.push(`A${idx + 1}: ${item.answer}`);
+        });
+      }
+
+      document.getElementById("summaryPreview").value = lines.join("
+");
+    }
+
+    async function sendAutomatedEmail() {
+      const webhookUrl = document.getElementById("webhookUrl").value.trim();
+      const statusBox = document.getElementById("dispatchStatus");
+
+      if (webhookUrl) {
+        localStorage.setItem("omnicell_make_webhook", webhookUrl);
+      }
+
+      const payload = {
+        senderEmail: "omnicell.groups@gmail.com",
+        candidateName: state.name || "Candidate",
+        candidateEmail: state.email || "",
+        roleTrack: state.role,
+        summary: document.getElementById("summaryPreview").value,
+        submittedAt: new Date().toISOString()
+      };
+
+      if (!webhookUrl) {
+        statusBox.style.display = "block";
+        statusBox.textContent = "Summary prepared. Paste your Make.com webhook URL above to dispatch the email automatically from omnicell.groups@gmail.com.";
+        return;
+      }
+
+      try {
+        const res = await fetch(webhookUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+        statusBox.style.display = "block";
+        if (res.ok) {
+          statusBox.textContent = `Confirmation packet sent to Make.com for ${payload.candidateEmail || "candidate"} via omnicell.groups@gmail.com.`;
+        } else {
+          statusBox.textContent = `Webhook responded with status ${res.status}. Double-check your Make.com scenario URL and try again.`;
+        }
+      } catch (err) {
+        statusBox.style.display = "block";
+        statusBox.textContent = "Unable to reach the webhook URL from this browser. Verify the Make.com URL and CORS/network access.";
+      }
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      initVoices();
+      const savedHook = localStorage.getItem("omnicell_make_webhook");
+      if (savedHook) {
+        document.getElementById("webhookUrl").value = savedHook;
+      }
+    });
+  </script>
+</body>
+</html>
